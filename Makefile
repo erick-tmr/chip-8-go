@@ -8,6 +8,10 @@ vet: fmt
 	go vet ./...
 .PHONY: vet
 
+test: vet
+	go test ./...
+.PHONY: test
+
 build: vet
 	go build -o ./dist ./cmd/chip8
 .PHONY: build
