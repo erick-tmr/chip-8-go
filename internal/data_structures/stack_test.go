@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func Test_stack_Push(t *testing.T) {
+func TestStackPush(t *testing.T) {
 	var test_stack Stack32[uint]
 
 	err := test_stack.Push(42)
@@ -28,7 +28,7 @@ func Test_stack_Push(t *testing.T) {
 	}
 }
 
-func Test_stack_Pop(t *testing.T) {
+func TestStackPop(t *testing.T) {
 	var test_stack Stack32[uint]
 	for i := 1; i < 11; i++ {
 		err := test_stack.Push(uint(i))
