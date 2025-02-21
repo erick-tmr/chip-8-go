@@ -23,10 +23,13 @@ func main() {
 	}
 	defer screenCleanup()
 
+	// Initial screen clear
 	err = screenInstance.Clear()
 	if err != nil {
 		panic(err)
 	}
+
+	screen.SetHelloWorld(&screenInstance)
 
 	// main loop
 	for emulatorInstance.State != emulator.Quitted {
@@ -40,11 +43,6 @@ func main() {
 		instruction_time := uint32(0) // calculate instruction time
 		sdl.Delay(screen.DELAY_TIME - instruction_time)
 
-		// clear screen and update
-		err = screenInstance.Clear()
-		if err != nil {
-			panic(err)
-		}
 		err = screenInstance.Update()
 		if err != nil {
 			panic(err)
