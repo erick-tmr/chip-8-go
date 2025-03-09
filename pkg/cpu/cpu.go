@@ -1,16 +1,15 @@
 package cpu
 
-import (
-	"fmt"
+import "github.com/erick-tmr/chip-8-go/pkg/memory"
 
-	"github.com/erick-tmr/chip-8-go/internal/data_structures"
-)
+type CPU struct {
+	I  uint16
+	pc uint16
+	V  [16]byte
+}
 
-var program_counter uint16
-var i_register uint16
-var call_stack data_structures.Stack32[uint16]
-
-func Start() {
-	fmt.Println("CPU initialized")
-
+func New() CPU {
+	return CPU{
+		pc: memory.LastProtectedAddress + 1, // Points to memory location after protected area (CHIP8 interpreter)
+	}
 }
