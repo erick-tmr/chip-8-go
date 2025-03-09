@@ -67,10 +67,17 @@ func New() (emulatorInstance Emulator, cleanup func(), err error) {
 	emulatorInstance.Screen = screen.New()
 	screenCleanup, err := emulatorInstance.Screen.Init()
 	if err != nil {
-		return emulatorInstance, nil, err
+		noopCleanup := func() {}
+		return emulatorInstance, noopCleanup, err
 	}
 	cleanup = func() {
 		screenCleanup()
+	}
+
+	// Initial screen clear
+	err = emulatorInstance.Screen.Clear()
+	if err != nil {
+		return emulatorInstance, cleanup, err
 	}
 
 	return emulatorInstance, cleanup, nil
@@ -82,12 +89,6 @@ func (e Emulator) Run() (err error) {
 			err = fmt.Errorf("%v / %v", ErrEmulatorNew, err)
 		}
 	}()
-
-	// Initial screen clear
-	err = e.Screen.Clear()
-	if err != nil {
-		return err
-	}
 
 	screen.SetHelloWorld(&e.Screen)
 
