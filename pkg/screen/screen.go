@@ -16,9 +16,9 @@ var ErrScreenUpdate error = fmt.Errorf("screen/clear: error updating screen / %v
 const CHIP8_SCREEN_WIDTH int32 = 64        //chip 8 resolution
 const CHIP8_SCREEN_HEIGHT int32 = 32       //chip 8 resolution
 const SCALE_FACTOR int32 = 10              // scale factor to make it visible
-const FOREGROUND_COLOR uint32 = 0x00000000 // black
-const BACKGROUND_COLOR uint32 = 0xFFFFFFFF // white
-const DELAY_TIME uint32 = 16               // chip 8 is 60Hz / FPS
+const FOREGROUND_COLOR uint32 = 0x33FF3300 // green
+const BACKGROUND_COLOR uint32 = 0x00000000 // black
+const DELAY_TIME uint32 = 16               // chip 8 is 60Hz / FPS or ~16.67 ms
 
 type Screen struct {
 	window   *sdl.Window
