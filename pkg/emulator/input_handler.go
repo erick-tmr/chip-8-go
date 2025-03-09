@@ -1,31 +1,30 @@
-package input
+package emulator
 
 import (
 	"fmt"
 
-	"github.com/erick-tmr/chip-8-go/pkg/emulator"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
 // Commands
 type Command interface {
-	Execute(emulatorInstance *emulator.Emulator)
+	Execute(emulatorInstance *Emulator)
 }
 
 type QuitCommand struct{}
 
-func (c QuitCommand) Execute(emulatorInstance *emulator.Emulator) {
-	emulatorInstance.State = emulator.Quitted
+func (c QuitCommand) Execute(emulatorInstance *Emulator) {
+	emulatorInstance.State = Quitted
 }
 
 type TogglePauseCommand struct{}
 
-func (c TogglePauseCommand) Execute(emulatorInstance *emulator.Emulator) {
-	if emulatorInstance.State == emulator.Running {
-		emulatorInstance.State = emulator.Paused
+func (c TogglePauseCommand) Execute(emulatorInstance *Emulator) {
+	if emulatorInstance.State == Running {
+		emulatorInstance.State = Paused
 		fmt.Println("emulator paused")
 	} else {
-		emulatorInstance.State = emulator.Running
+		emulatorInstance.State = Running
 		fmt.Println("emulator resumed")
 	}
 }
@@ -83,7 +82,7 @@ func NewInputHandler() *InputHandler {
 	return handler
 }
 
-func (i *InputHandler) HandleInput(emulatorInstance *emulator.Emulator) {
+func (i *InputHandler) HandleInput(emulatorInstance *Emulator) {
 	for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
 		handler, exists := i.handlers[event.GetType()]
 		if !exists {
